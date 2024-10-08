@@ -18,12 +18,6 @@ endif()
 # cmake options
 option(IMNODES_EXAMPLES "Build examples" ${IMNODES_STANDALONE_PROJECT})
 
-# allow custom imgui target name since this can vary because imgui doesn't natively include a CMakeLists.txt
-if(NOT DEFINED IMNODES_IMGUI_TARGET_NAME)
-    find_package(imgui CONFIG REQUIRED)
-    set(IMNODES_IMGUI_TARGET_NAME imgui::imgui)
-endif()
-
 
 if(MSVC)
     add_compile_definitions(SDL_MAIN_HANDLED)
@@ -45,8 +39,8 @@ target_sources(imnodes PRIVATE
     imnodes.h
     imnodes_internal.h
     imnodes.cpp)
-target_include_directories(imnodes PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(imnodes PUBLIC ${IMNODES_IMGUI_TARGET_NAME})
+target_include_directories(imnodes PUBLIC imgui)
+target_link_libraries(imnodes PUBLIC imgui)
 
 # Example projects
 if(IMNODES_EXAMPLES)
