@@ -35,7 +35,11 @@ endif()
 
 # Imnodes
 
-include_directories(${CMAKE_SOURCE_DIR}/library/imgui)
+if (NOT DEFINED SAGE_DIR)
+    message(FATAL_ERROR "SAGE_DIR has not been set!")
+endif()
+
+include_directories(${SAGE_DIR}/library/imgui)
 add_library(imnodes STATIC
     imnodes.h
     imnodes_internal.h
